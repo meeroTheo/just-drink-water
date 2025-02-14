@@ -1,4 +1,4 @@
-package com.example.compose
+package com.jdw.justdrink
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -273,7 +273,6 @@ fun AppTheme(
 
   MaterialTheme(
     colorScheme = colorScheme,
-    typography = AppTypography,
     content = content
   )
 }

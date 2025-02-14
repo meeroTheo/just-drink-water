@@ -17,17 +17,6 @@ kotlin {
         }
     }
     
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "ComposeApp"
-            isStatic = true
-        }
-    }
-    
     sourceSets {
         
         androidMain.dependencies {
@@ -43,23 +32,17 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
-
-            implementation(libs.navigator)
-            implementation(libs.navigator.screen.model)
-            implementation(libs.navigator.transitions)
-            implementation(libs.navigator.koin)
-            implementation(libs.koin.core)
+            implementation(libs.androidx.navigation.compose)
         }
-
     }
 }
 
 android {
-    namespace = "com.jdw.todo"
+    namespace = "com.jdw.justdrink"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.jdw.todo"
+        applicationId = "com.jdw.justdrink"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -82,6 +65,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.ui.text.google.fonts)
     debugImplementation(compose.uiTooling)
 }
 

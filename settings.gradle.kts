@@ -1,4 +1,4 @@
-rootProject.name = "just-drink-water"
+rootProject.name = "JustDrinkWater"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

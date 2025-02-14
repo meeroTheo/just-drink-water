@@ -1,6 +1,5 @@
-package com.jdw.todo
+package com.jdw.justdrink
 
-import App
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent

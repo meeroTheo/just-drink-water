@@ -14,10 +14,11 @@ androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.0"
 junit = "4.13.2"
 kotlin = "2.1.0"
-voyager = "1.1.0-beta02"
-koin = "3.5.3"
+navigationCompose = "2.8.7"
+uiTextGoogleFonts = "1.7.8"
 
 [libraries]
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -30,11 +31,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref= "voyager"}
-navigator-screen-model = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager"}
-navigator-transitions = {module = "cafe.adriel.voyager:voyager-transitions", version.ref="voyager"}
-navigator-koin = {module = "cafe.adriel.voyager: voyager-koin", version.ref = "voyager"}
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

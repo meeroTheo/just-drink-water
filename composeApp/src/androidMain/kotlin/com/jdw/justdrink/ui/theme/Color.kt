@@ -1,4 +1,4 @@
-package com.example.compose
+package com.jdw.justdrink
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF904A45)
