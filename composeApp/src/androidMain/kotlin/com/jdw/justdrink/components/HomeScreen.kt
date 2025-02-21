@@ -1,51 +1,19 @@
-package com.jdw.justdrink
+package com.jdw.justdrink.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.*
+import com.jdw.justdrink.components.BottomNavigationBar
 
 @Composable
 fun HomeScreen() {
-    val navController = rememberNavController()
-
-    Scaffold(
-        bottomBar = { BottomNavigationBar(navController) }
-    ) { paddingValues ->
+    Scaffold (
+        bottomBar = { BottomNavigationBar()}
+    ){ paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
-            NavigationGraph(navController)
+            HomeContent()
         }
-    }
-}
-
-@Composable
-fun BottomNavigationBar(navController: NavHostController) {
-    val items = listOf("Home", "Settings")
-    val selectedItem = remember { mutableStateOf("Home") }
-
-    NavigationBar {
-        items.forEach { item ->
-            NavigationBarItem(
-                icon = {},
-                label = { Text(item) },
-                selected = selectedItem.value == item,
-                onClick = {
-                    selectedItem.value = item
-                    navController.navigate(item.lowercase())
-                }
-            )
-        }
-    }
-}
-
-@Composable
-fun NavigationGraph(navController: NavHostController) {
-    NavHost(navController, startDestination = "home") {
-        composable("home") { HomeContent() }
-        composable("settings") { SettingsContent() }
     }
 }
 
@@ -62,4 +30,3 @@ fun SettingsContent() {
         Text(text = "Settings Screen", style = MaterialTheme.typography.headlineMedium)
     }
 }
-
