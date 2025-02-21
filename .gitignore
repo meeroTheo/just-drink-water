@@ -16,3 +16,13 @@ captures
 !*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
+
+# Built files
+*/build
+/build
+*.apk
+app/**/output.json
+/wrapper
+/caches
+/daemon
+
