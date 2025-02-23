@@ -5,6 +5,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.jdw.justdrink.components.BottomNavigationBar
+import com.jdw.justdrink.components.WaterProgression
 
 @Composable
 fun HomeScreen() {
@@ -13,6 +14,7 @@ fun HomeScreen() {
     ){ paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             HomeContent()
+            WaterProgression()
         }
     }
 }
