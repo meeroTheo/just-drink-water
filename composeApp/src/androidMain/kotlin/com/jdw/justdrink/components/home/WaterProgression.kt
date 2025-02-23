@@ -1,20 +1,21 @@
 package com.jdw.justdrink.components.home
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlin.math.cos
+import kotlin.math.sin
 
 @SuppressLint("DefaultLocale")
 @Composable
@@ -30,63 +31,99 @@ fun WaterProgression(
         MaterialTheme.colorScheme.onSurface
     )
 
-    Card(
-        shape = RoundedCornerShape(20.dp),
+    //infinite gradient animation
+    val infiniteTransition = rememberInfiniteTransition()
+    val time by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 2 * Math.PI.toFloat(), // Full sine wave cycle
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 8000, easing = LinearEasing), // Slower animation (8 seconds)
+            repeatMode = RepeatMode.Reverse // Smoothly reverse the animation
+        )
+    )
+
+    //motion of the gradient (gas like)
+    val offsetX1 = 300 * sin(time).toFloat() //first wave
+    val offsetX2 = 200 * cos(time * 1.5f).toFloat()
+    val offsetX3 = 100 * sin(time * 0.8f).toFloat()
+
+    //combining the waves
+    val combinedOffsetX = offsetX1 + offsetX2 + offsetX3
+
+    //moving gradient brush
+    val gradientBrush = Brush.horizontalGradient(
+        colors = gradientColors,
+        startX = -1000 + combinedOffsetX, // Apply the combined offset
+        endX = 1000 + combinedOffsetX
+    )
+
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+            .padding(16.dp)
+            .border(
+                width = 2.dp,
+                color = MaterialTheme.colorScheme.primary, // You can change the color here
+                shape = RoundedCornerShape(20.dp)
+            )
     ) {
-        Column {
-            //gradient
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(brush = Brush.horizontalGradient(gradientColors))
-                    .padding(16.dp)
-            ) {
-                Column {
-                    Text(
-                        text = "Water Intake",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
-                        color = MaterialTheme.colorScheme.inverseSurface
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = "$consumedWater ml of $maxWater ml",
-                        fontSize = 16.sp,
-                        color = MaterialTheme.colorScheme.inverseSurface
-                    )
-                }
-            }
-
-            //Bottom Half
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.surfaceContainerLowest) //secondary dark color
-                    .padding(16.dp)
-            ) {
-                //progression bar (need to make this look better)
-                LinearProgressIndicator(
-                    progress = { progress },
+        Card(
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        ) {
+            Column {
+                //Gradient box
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(12.dp),
-                    color = MaterialTheme.colorScheme.tertiary, //theme-adaptive progress color
-                    trackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
-                )
+                        .background(brush = gradientBrush) // Apply the animated gradient
+                        .padding(16.dp)
+                ) {
+                    //text on Top of the Gradient
+                    Column {
+                        Text(
+                            text = "Water Intake",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                            color = Color.White // Set text color to white
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "$consumedWater ml of $maxWater ml",
+                            fontSize = 16.sp,
+                            color = Color.White // Set text color to white
+                        )
+                    }
+                }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                //bottom Half
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.surfaceContainerLowest) //secondary dark color
+                        .padding(16.dp)
+                ) {
+                    //progression bar (need to make this look better)
+                    LinearProgressIndicator(
+                        progress = { progress },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(12.dp),
+                        color = MaterialTheme.colorScheme.onSurface, //theme-adaptive progress color
+                        trackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
+                    )
 
-                //text for remaining water
-                Text(
-                    text = "You need $remainingWater ml to reach your daily goal",
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    //text for remaining water
+                    Text(
+                        text = "You need $remainingWater ml to reach your daily goal",
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
             }
         }
     }

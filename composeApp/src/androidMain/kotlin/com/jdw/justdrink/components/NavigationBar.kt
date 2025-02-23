@@ -13,6 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.graphics.Color
+
 import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
@@ -27,7 +30,10 @@ fun BottomNavigationBar(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination?.route
 
-    NavigationBar(modifier = Modifier.fillMaxWidth()) {
+    NavigationBar(
+        modifier = Modifier.fillMaxWidth(),
+
+    ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = {
