@@ -42,7 +42,7 @@ fun WaterProgression(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(brush = Brush.verticalGradient(gradientColors))
+                    .background(brush = Brush.horizontalGradient(gradientColors))
                     .padding(16.dp)
             ) {
                 Column {
