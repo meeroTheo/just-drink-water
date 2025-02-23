@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.jdw.justdrink.components.BottomNavigationBar
-import com.jdw.justdrink.components.HomePage
+import com.jdw.justdrink.components.home.HomePage
 import com.jdw.justdrink.components.SettingsPage
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold

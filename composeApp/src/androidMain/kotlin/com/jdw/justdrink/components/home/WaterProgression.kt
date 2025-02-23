@@ -1,4 +1,4 @@
-package com.jdw.justdrink.components
+package com.jdw.justdrink.components.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -39,6 +39,7 @@ fun WaterProgression(
     ) {
         Column {
             //gradient
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -65,7 +66,7 @@ fun WaterProgression(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.surfaceContainerHigh) //secondary dark color
+                    .background(MaterialTheme.colorScheme.surfaceContainerLowest) //secondary dark color
                     .padding(16.dp)
             ) {
                 //progression bar (need to make this look better)
