@@ -9,9 +9,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlin.math.cos
@@ -106,22 +108,32 @@ fun WaterProgression(
                         .padding(16.dp)
                 ) {
                     //progression bar (need to make this look better)
-                    LinearProgressIndicator(
-                        progress = { progress },
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(12.dp),
-                        color = MaterialTheme.colorScheme.onSurface, //theme-adaptive progress color
-                        trackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
-                    )
+                            .height(14.dp)
+                            .clip(RoundedCornerShape(6.dp)) // Rounded corners for the progress bar
+                            .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)) // Track color
+                    ) {
+                        // Progress Indicator
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth(progress) // Set width based on progress
+                                .height(14.dp)
+                                .clip(RoundedCornerShape(6.dp)) // Rounded corners for the progress
+                                .background(MaterialTheme.colorScheme.onSurface) // Progress color
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    //text for remaining water
+                    // Text for remaining water
                     Text(
                         text = "You need $remainingWater ml to reach your daily goal",
-                        fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurface
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        textAlign = TextAlign.Center
+
                     )
                 }
             }

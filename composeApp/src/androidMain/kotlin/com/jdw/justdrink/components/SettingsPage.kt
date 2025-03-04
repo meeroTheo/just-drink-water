@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 fun SettingsPage() {
     //Settings
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
-        Text(text = "Settings Screen", style = MaterialTheme.typography.headlineMedium)
+        Text(text = "More", style = MaterialTheme.typography.headlineMedium)
     }
 }
 
