@@ -1,28 +1,24 @@
-*.iml
-.kotlin
 .gradle
-**/build/
-xcuserdata
-!src/**/build/
-local.properties
-.idea
+/local.properties
+/.idea/workspace.xml
 .DS_Store
-captures
-.externalNativeBuild
-.cxx
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcodeproj/project.xcworkspace/
-!*.xcworkspace/contents.xcworkspacedata
-**/xcshareddata/WorkspaceSettings.xcsettings
+.idea/*
+!.idea/icon.png
+*iml
+*.iml
 
 # Built files
 */build
 /build
 *.apk
 app/**/output.json
-/wrapper
-/caches
-/daemon
 
+# Unnecessary file
+*.swp
+
+.kotlin
+.tmp
+/caches
+/config
+/daemon
+/wrapper

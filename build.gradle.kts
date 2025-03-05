@@ -1,9 +1,40 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+
 plugins {
-    // this is necessary to avoid the plugins to be loaded multiple times
-    // in each subproject's classloader
-    alias(libs.plugins.androidApplication) apply false
-    alias(libs.plugins.androidLibrary) apply false
-    alias(libs.plugins.composeMultiplatform) apply false
-    alias(libs.plugins.composeCompiler) apply false
-    alias(libs.plugins.kotlinMultiplatform) apply false
+    id("com.android.application") apply false
+    id("com.android.library") apply false
+    kotlin("android") apply false
+    alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.versions)
+    cleanup
+    base
+}
+
+allprojects {
+    group = PUBLISHING_GROUP
+}
+
+val detektFormatting = libs.detekt.formatting
+
+subprojects {
+    apply {
+        plugin("io.gitlab.arturbosch.detekt")
+    }
+
+    detekt {
+        config.from(rootProject.files("config/detekt/detekt.yml"))
+    }
+
+    dependencies {
+        detektPlugins(detektFormatting)
+    }
+}
+
+tasks {
+    withType<DependencyUpdatesTask>().configureEach {
+        rejectVersionIf {
+            candidate.version.isStableVersion().not()
+        }
+    }
 }

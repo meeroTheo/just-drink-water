@@ -1,31 +1,25 @@
-rootProject.name = "JustDrinkWater"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 pluginManagement {
     repositories {
-        google {
-            mavenContent {
-                includeGroupAndSubgroups("androidx")
-                includeGroupAndSubgroups("com.android")
-                includeGroupAndSubgroups("com.google")
-            }
-        }
-        mavenCentral()
         gradlePluginPortal()
+        google()
+        mavenCentral()
     }
 }
 
 dependencyResolutionManagement {
     repositories {
-        google {
-            mavenContent {
-                includeGroupAndSubgroups("androidx")
-                includeGroupAndSubgroups("com.android")
-                includeGroupAndSubgroups("com.google")
-            }
-        }
+        google()
         mavenCentral()
     }
 }
 
-include(":composeApp")
+rootProject.name = ("just-drink-water")
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+include(
+    "app",
+    "library-android",
+    "library-compose",
+    "library-kotlin"
+)
