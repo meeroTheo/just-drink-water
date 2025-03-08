@@ -10,6 +10,7 @@ android {
     compileSdk = 34
     defaultConfig {
         minSdk = libs.versions.min.sdk.version.get().toInt()
+        targetSdk = libs.versions.target.sdk.version.get().toInt()
         namespace = "com.ncorti.kotlin.template.app"
 
         applicationId = AppCoordinates.APP_ID
@@ -48,9 +49,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraryAndroid)
-    implementation(projects.libraryCompose)
-    implementation(projects.libraryKotlin)
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraint.layout)

@@ -1,7 +1,6 @@
 package com.jdw.justdrink.components.home
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -10,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.jdw.justdrink.data.IntakeViewModel
 import kotlinx.coroutines.launch
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @Composable
 fun HomePage(viewModel: IntakeViewModel) {
     val coroutineScope = rememberCoroutineScope()

@@ -1,7 +1,5 @@
 package com.jdw.justdrink.data
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.time.format.DateTimeFormatter
 
 
@@ -11,7 +9,7 @@ class WaterIntakeRepository(private val waterIntakeDao: WaterIntakeDao) {
         return waterIntakeDao.getIntakeForDate(date)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     suspend fun insertOrUpdateIntake(waterIntake: WaterIntake) {
         val today = waterIntake.date.format(DateTimeFormatter.ISO_LOCAL_DATE) // 🔹 Ensure correct format
         val existingIntake = getIntakeForDate(today)
