@@ -28,6 +28,7 @@ fun HomePage(viewModel: IntakeViewModel) {
     val context = LocalContext.current
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        //need to give only today's total intake to waterprogression, not lifetime
         WaterProgression(totalIntake)
 
 
