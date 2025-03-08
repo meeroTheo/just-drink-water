@@ -1,5 +1,7 @@
 package com.jdw.justdrink
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -12,9 +14,11 @@ import com.jdw.justdrink.components.SettingsPage
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import com.jdw.justdrink.data.IntakeViewModel
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun App() {
+fun App(intakeViewModel: IntakeViewModel) {
     val navController = rememberNavController()
 
     MaterialTheme {
@@ -24,15 +28,10 @@ fun App() {
         ) { paddingValues ->
             Box(modifier = Modifier.padding(paddingValues)) {
                 NavHost(navController = navController, startDestination = "home") {
-                    composable("home") { HomePage() }
+                    composable("home") { HomePage(intakeViewModel) }
                     composable("settings") { SettingsPage() }
                 }
             }
         }
     }
-}
-@Preview
-@Composable
-fun AppPreview() {
-    App()
 }

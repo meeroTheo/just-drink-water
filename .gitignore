@@ -22,3 +22,4 @@ app/**/output.json
 /config
 /daemon
 /wrapper
+/native
