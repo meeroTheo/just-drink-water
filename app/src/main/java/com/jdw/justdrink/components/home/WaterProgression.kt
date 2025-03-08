@@ -22,7 +22,7 @@ import kotlin.math.sin
 @SuppressLint("DefaultLocale")
 @Composable
 fun WaterProgression(
-    consumedWater: Int = 1500, //also needs to be changed
+    consumedWater: Int = 0, //also needs to be changed
     maxWater: Int = 3000, //this will need to be changed
 ) {
     val progress = consumedWater.toFloat() / maxWater
@@ -127,13 +127,15 @@ fun WaterProgression(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Text for remaining water
                     Text(
-                        text = "You need $remainingWater ml to reach your daily goal",
+                        text = if (consumedWater < maxWater) {
+                            "You need $remainingWater ml to reach your daily goal"
+                        } else {
+                            "You've reached your daily water goal!"
+                        },
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface,
                         textAlign = TextAlign.Center
-
                     )
                 }
             }

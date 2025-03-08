@@ -1,5 +1,6 @@
 package com.jdw.justdrink.components.home
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.material3.*
@@ -12,14 +13,20 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocalCafe
 import androidx.compose.ui.text.input.TextFieldValue
+import com.jdw.justdrink.helper.SharedPreferencesHelper
 
 @Composable
-fun WaterIntakeButtons(onBottleSelected: (Int) -> Unit, customSize: Int?) {
-    var localCustomSize by remember { mutableStateOf(customSize) }
+fun WaterIntakeButtons(
+    context: Context,
+    onBottleSelected: (Int) -> Unit,
+    customSize: Int?
+) {
+    val sharedPreferencesHelper = remember { SharedPreferencesHelper(context) }
+    var localCustomSize by remember { mutableStateOf(customSize ?: sharedPreferencesHelper.getCustomSize()) }
     var showDialog by remember { mutableStateOf(false) }
     var inputValue by remember { mutableStateOf(TextFieldValue("")) }
 
-    val bottleSizes = listOf(50, 100, 150, 200, 250) + (localCustomSize ?: "Custom")
+    val bottleSizes = listOf(50, 100, 150, 200, 250) + (localCustomSize?.let { listOf(it) } ?: listOf("Custom"))
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
@@ -57,7 +64,7 @@ fun WaterIntakeButtons(onBottleSelected: (Int) -> Unit, customSize: Int?) {
             }
         }
     }
-    //when custom is clicked
+
     if (showDialog) {
         AlertDialog(
             onDismissRequest = { showDialog = false },
@@ -71,9 +78,10 @@ fun WaterIntakeButtons(onBottleSelected: (Int) -> Unit, customSize: Int?) {
             },
             confirmButton = {
                 Button(onClick = {
-                    inputValue.text.toIntOrNull()?.let {
-                        localCustomSize = it
-                        onBottleSelected(it)
+                    inputValue.text.toIntOrNull()?.let { size ->
+                        localCustomSize = size
+                        sharedPreferencesHelper.saveCustomSize(size)
+                        onBottleSelected(size)
                     }
                     showDialog = false
                 }) {
