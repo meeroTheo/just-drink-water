@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     alias(libs.plugins.compose.compiler)
-    id("com.google.devtools.ksp") version "2.0.21-1.0.27"
+    id("com.google.devtools.ksp") version "2.1.10-1.0.29"
 }
 
 android {
@@ -66,17 +66,12 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.navigation.compose)
     implementation(libs.ui.tooling.preview.android)
-
-
-    testImplementation(libs.junit)
-
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit.ktx)
-    androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(libs.espresso.core)
+    implementation(libs.androidx.core.i18n)
 
     //room
     implementation(libs.androidx.room.runtime) // ✅ Latest Room
     implementation(libs.androidx.room.ktx) // ✅ Coroutines support
     ksp(libs.androidx.room.compiler) // ✅ Annotation processor (required!)
+
+
 }

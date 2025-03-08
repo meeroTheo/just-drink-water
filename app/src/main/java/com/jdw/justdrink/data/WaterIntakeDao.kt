@@ -5,13 +5,11 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import java.time.LocalDateTime
 
 @Dao
 interface WaterIntakeDao {
-    @Query("SELECT * FROM water_intake WHERE date = :date LIMIT 1")
-    suspend fun getIntakeForDate(date: LocalDateTime): WaterIntake?
-
+    @Query("SELECT * FROM water_intake WHERE strftime('%Y-%m-%d', date) = :date LIMIT 1") // 🔹 Fix date format issue
+    suspend fun getIntakeForDate(date: String): WaterIntake?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIntake(waterIntake: WaterIntake)

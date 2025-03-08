@@ -1,17 +1,21 @@
 package com.jdw.justdrink.data
 
-import java.time.LocalDateTime
-import kotlinx.coroutines.flow.Flow
+import android.os.Build
+import androidx.annotation.RequiresApi
+import java.time.format.DateTimeFormatter
+
 
 class WaterIntakeRepository(private val waterIntakeDao: WaterIntakeDao) {
 
-    suspend fun getIntakeForDate(date: LocalDateTime): WaterIntake? {
+    suspend fun getIntakeForDate(date: String): WaterIntake? {
         return waterIntakeDao.getIntakeForDate(date)
     }
 
-
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun insertOrUpdateIntake(waterIntake: WaterIntake) {
-        val existingIntake = getIntakeForDate(waterIntake.date)
+        val today = waterIntake.date.format(DateTimeFormatter.ISO_LOCAL_DATE) // 🔹 Ensure correct format
+        val existingIntake = getIntakeForDate(today)
+
         if (existingIntake == null) {
             waterIntakeDao.insertIntake(waterIntake)
         } else {
