@@ -1,6 +1,7 @@
 package com.jdw.justdrink
 
 
+import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
@@ -20,14 +21,25 @@ fun App(intakeViewModel: IntakeViewModel) {
     val navController = rememberNavController()
 
     MaterialTheme {
-        Scaffold(
-            modifier = Modifier.fillMaxSize(),
-            bottomBar = { BottomNavigationBar(navController) }
-        ) { paddingValues ->
-            Box(modifier = Modifier.padding(paddingValues)) {
-                NavHost(navController = navController, startDestination = "home") {
-                    composable("home") { HomePage(intakeViewModel) }
-                    composable("settings") { SettingsPage() }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.surfaceContainerLowest)
+        ) {
+            Scaffold(
+                modifier = Modifier.fillMaxSize(),
+                bottomBar = { BottomNavigationBar(navController) }
+            ) { paddingValues ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                        .background(MaterialTheme.colorScheme.surfaceContainerLowest)
+                ) {
+                    NavHost(navController = navController, startDestination = "home") {
+                        composable("home") { HomePage(intakeViewModel) }
+                        composable("settings") { SettingsPage() }
+                    }
                 }
             }
         }

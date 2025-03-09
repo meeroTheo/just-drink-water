@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.detekt)
     alias(libs.plugins.versions)
+    id("maven-publish")
     cleanup
     base
 }
@@ -39,3 +40,5 @@ tasks {
         }
     }
 }
+
+

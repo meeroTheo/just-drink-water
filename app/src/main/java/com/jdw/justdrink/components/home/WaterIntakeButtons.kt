@@ -1,8 +1,11 @@
 package com.jdw.justdrink.components.home
 
 import android.content.Context
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -12,6 +15,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocalCafe
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import com.jdw.justdrink.helper.SharedPreferencesHelper
 
@@ -29,10 +35,17 @@ fun WaterIntakeButtons(
     val bottleSizes = listOf(50, 100, 150, 200, 250) + (localCustomSize?.let { listOf(it) } ?: listOf("Custom"))
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(3),
-        modifier = Modifier.padding(20.dp),
-        horizontalArrangement = Arrangement.spacedBy(24.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
+        columns = GridCells.Fixed(2),
+        modifier = Modifier
+            .padding(16.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainerLow)
+            .border(
+                width = 1.5.dp,
+                color = MaterialTheme.colorScheme.secondary,
+                shape = RoundedCornerShape(25.dp)
+            )
+
     ) {
         items(bottleSizes.size) { index ->
             val size = bottleSizes[index]
@@ -45,10 +58,17 @@ fun WaterIntakeButtons(
                         onBottleSelected(size as Int)
                     }
                 },
-                modifier = Modifier.size(65.dp),
-                containerColor = MaterialTheme.colorScheme.surface
+                modifier = Modifier
+                    .size(90.dp),
+
+                shape = RectangleShape,
+                containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
             ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
                     Icon(
                         imageVector = Icons.Filled.LocalCafe,
                         contentDescription = "Cup Icon",
@@ -57,7 +77,7 @@ fun WaterIntakeButtons(
                     )
                     Text(
                         text = if (size == "Custom") "Custom" else "$size ml",
-                        fontSize = 10.sp,
+                        fontSize = 12.sp,
                         textAlign = TextAlign.Center
                     )
                 }
@@ -69,13 +89,22 @@ fun WaterIntakeButtons(
         AlertDialog(
             onDismissRequest = { showDialog = false },
             title = { Text("Enter Custom Size") },
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
             text = {
                 OutlinedTextField(
                     value = inputValue,
                     onValueChange = { inputValue = it },
-                    label = { Text("Size in ml") }
+                    label = {
+                        Text(
+                            text = "Size",
+                            style = TextStyle(color = MaterialTheme.colorScheme.outline) // Change label color here
+                        )
+                    }
+
+
                 )
-            },
+            }
+            ,
             confirmButton = {
                 Button(onClick = {
                     inputValue.text.toIntOrNull()?.let { size ->

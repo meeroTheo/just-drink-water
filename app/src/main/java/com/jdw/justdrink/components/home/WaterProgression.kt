@@ -37,7 +37,7 @@ fun WaterProgression(
     val infiniteTransition = rememberInfiniteTransition()
     val time by infiniteTransition.animateFloat(
         initialValue = 0f,
-        targetValue = 2 * Math.PI.toFloat(), // Full sine wave cycle
+        targetValue = 2 * Math.PI.toFloat(), //Full sine wave cycle
         animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 8000, easing = LinearEasing), // Slower animation (8 seconds)
             repeatMode = RepeatMode.Reverse // Smoothly reverse the animation
@@ -63,11 +63,11 @@ fun WaterProgression(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .border(
-                width = 2.dp,
-                color = MaterialTheme.colorScheme.primary, // You can change the color here
-                shape = RoundedCornerShape(20.dp)
-            )
+//            .border(
+//                width = 2.dp,
+//                color = MaterialTheme.colorScheme.primary, // You can change the color here
+//                shape = RoundedCornerShape(20.dp)
+//            )
     ) {
         Card(
             shape = RoundedCornerShape(20.dp),
@@ -104,7 +104,7 @@ fun WaterProgression(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.surfaceContainerLowest) //secondary dark color
+                        .background(MaterialTheme.colorScheme.surfaceContainerLow) //secondary dark color
                         .padding(16.dp)
                 ) {
                     //progression bar (need to make this look better)
