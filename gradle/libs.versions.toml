@@ -1,4 +1,5 @@
 [versions]
+accompanist-navigation-animation = "0.32.0"
 agp = "8.8.0"
 androidx_activity_compose = "1.9.3"
 androidx_test = "1.6.1"
@@ -30,6 +31,7 @@ room = "2.6.1"
 core-i18n = "1.0.0-alpha01"
 
 [libraries]
+accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist-navigation-animation" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material-version" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material-icons-extended-version" }
 

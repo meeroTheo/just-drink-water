@@ -57,7 +57,7 @@ dependencies {
 
     // Compose dependencies
     implementation(platform(libs.compose.bom))
-    implementation(libs.compose.material)
+    //implementation(libs.compose.material)
     implementation(libs.compose.foundation)
     implementation(libs.compose.ui)
     implementation(libs.material3.android)
@@ -67,9 +67,11 @@ dependencies {
     implementation(libs.androidx.core.i18n)
 
     //room
-    implementation(libs.androidx.room.runtime) // ✅ Latest Room
-    implementation(libs.androidx.room.ktx) // ✅ Coroutines support
-    ksp(libs.androidx.room.compiler) // ✅ Annotation processor (required!)
+    implementation(libs.androidx.room.runtime) //
+    implementation(libs.androidx.room.ktx) // 
+    ksp(libs.androidx.room.compiler) //
+
+    implementation(libs.accompanist.navigation.animation)
 
 
 }

@@ -7,11 +7,15 @@ import androidx.compose.material.icons.filled.WaterDrop
 import androidx.compose.material.icons.outlined.WaterDrop
 import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 
 import androidx.navigation.compose.currentBackStackEntryAsState
 
@@ -29,6 +33,7 @@ fun BottomNavigationBar(navController: NavController) {
 
     NavigationBar(
         modifier = Modifier.fillMaxWidth(),
+        containerColor = MaterialTheme.colorScheme.surfaceContainer
 
     ) {
         items.forEachIndexed { index, item ->
@@ -39,7 +44,11 @@ fun BottomNavigationBar(navController: NavController) {
                         contentDescription = item
                     )
                 },
-                label = { Text(item) },
+                label = { Text(
+                    text = item,
+                    fontSize = 13.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center) },
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index

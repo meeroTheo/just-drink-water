@@ -59,7 +59,11 @@ fun WaterIntakeButtons(
                     }
                 },
                 modifier = Modifier
-                    .size(90.dp),
+                    .size(90.dp).border(
+                        width = 0.2.dp,
+                        color = MaterialTheme.colorScheme.secondary,
+
+                    ),
 
                 shape = RectangleShape,
                 containerColor = MaterialTheme.colorScheme.surfaceContainerLow,

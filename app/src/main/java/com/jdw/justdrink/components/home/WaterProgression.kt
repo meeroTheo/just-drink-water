@@ -37,7 +37,7 @@ fun WaterProgression(
     val infiniteTransition = rememberInfiniteTransition()
     val time by infiniteTransition.animateFloat(
         initialValue = 0f,
-        targetValue = 2 * Math.PI.toFloat(), //Full sine wave cycle
+        targetValue = 2 * Math.PI.toFloat(), // Full sine wave cycle
         animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 8000, easing = LinearEasing), // Slower animation (8 seconds)
             repeatMode = RepeatMode.Reverse // Smoothly reverse the animation

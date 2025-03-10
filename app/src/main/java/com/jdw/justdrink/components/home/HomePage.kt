@@ -2,9 +2,13 @@ package com.jdw.justdrink.components.home
 
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.jdw.justdrink.data.IntakeViewModel
 import kotlinx.coroutines.launch
@@ -26,7 +30,24 @@ fun HomePage(viewModel: IntakeViewModel) {
     //get context for custom size persistence
     val context = LocalContext.current
 
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+
+    Column(modifier = Modifier.fillMaxSize()) {
+
+        // Header Section
+        Column(modifier = Modifier.padding(top = 80.dp, start = 16.dp)) {
+            Text(
+                text = "Welcome",
+                style = MaterialTheme.typography.headlineSmall,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "placeholder", // Replace with actual user name
+                style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold), // Large, bold
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
         //need to give only today's total intake to waterprogression, not lifetime
         WaterProgression(totalIntake)
 
