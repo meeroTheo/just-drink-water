@@ -9,16 +9,18 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.jdw.justdrink.components.BottomNavigationBar
 import com.jdw.justdrink.components.home.HomePage
-import com.jdw.justdrink.components.SettingsPage
+import com.jdw.justdrink.components.settings.SettingsPage
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.jdw.justdrink.data.IntakeViewModel
+import androidx.compose.ui.platform.LocalContext
 
 
 @Composable
 fun App(intakeViewModel: IntakeViewModel) {
     val navController = rememberNavController()
+    val context = LocalContext.current // Get the context
 
     MaterialTheme {
         Box(
@@ -38,7 +40,7 @@ fun App(intakeViewModel: IntakeViewModel) {
                 ) {
                     NavHost(navController = navController, startDestination = "home") {
                         composable("home") { HomePage(intakeViewModel) }
-                        composable("settings") { SettingsPage() }
+                        composable("settings") { SettingsPage(context) }
                     }
                 }
             }

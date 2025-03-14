@@ -29,6 +29,7 @@ ui-tooling-preview-android = "1.7.8"
 ui-version = "1.7.8"
 room = "2.6.1"
 core-i18n = "1.0.0-alpha01"
+work-runtime-ktx = "2.8.1"
 
 [libraries]
 accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist-navigation-animation" }
@@ -36,6 +37,7 @@ androidx-material = { module = "androidx.compose.material:material", version.ref
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material-icons-extended-version" }
 
 androidx-ui = { module = "androidx.compose.ui:ui", version.ref = "ui-version" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work-runtime-ktx" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 guava-v3331jre = { module = "com.google.guava:guava", version.ref = "guava-version" }
 junit = { module = "junit:junit", version.ref = "junit" }
