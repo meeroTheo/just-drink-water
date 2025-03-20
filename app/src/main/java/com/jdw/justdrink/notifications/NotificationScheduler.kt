@@ -11,26 +11,28 @@ object NotificationScheduler {
         var interval = prefs.getReminderFrequency().toLong()
 
         if (interval < 15) {
-            interval = 15 //min interval reqired for workmanager
+            interval = 15
         }
 
-        //cancel existing work before scheduling new one
+        //cancels the previous work when interval changes
         WorkManager.getInstance(context).cancelUniqueWork("WaterReminder")
 
-
-        val workRequest = PeriodicWorkRequestBuilder<NotificationWorker>(interval, TimeUnit.MINUTES)
+        val workRequest = PeriodicWorkRequestBuilder<NotificationWorker>(1, TimeUnit.MINUTES)
+            .setInitialDelay(interval, TimeUnit.MINUTES)
             .setConstraints(
                 Constraints.Builder()
-                    .setRequiresBatteryNotLow(true) //prevent running on low battery
-                    .setRequiresCharging(false) //can run even if not charging
+                    .setRequiresBatteryNotLow(true)
+                    .setRequiresCharging(false)
                     .build()
             )
             .build()
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
             "WaterReminder",
-            ExistingPeriodicWorkPolicy.REPLACE, //ensure only one job exists
+            ExistingPeriodicWorkPolicy.REPLACE,
             workRequest
         )
     }
+
+
 }

@@ -19,15 +19,21 @@ class NotificationWorker(context: Context, workerParams: WorkerParameters) :
         val sleepStart = prefs.getSleepStart()
         val sleepEnd = prefs.getSleepEnd()
 
-        Log.d("NotificationWorker", "Worker triggered at $currentHour:$currentMinute")
-
-        if (currentHour in sleepStart until sleepEnd) {
-            Log.d("NotificationWorker", "Skipping notification: Sleep hours active ($sleepStart - $sleepEnd)")
-            return Result.success()
+        val isSleeping = if (sleepStart < sleepEnd) {
+            currentHour in sleepStart until sleepEnd
+        } else {
+            currentHour in sleepStart..23 || currentHour in 0 until sleepEnd
         }
 
-        Log.d("NotificationWorker", "Sending notification")
-        NotificationUtils.showNotification(applicationContext, "Water Reminder", "Time to drink water!")
+        Log.d("NotificationWorker", "Worker triggered at $currentHour:$currentMinute")
+        Log.d("NotificationWorker", "Sleep schedule: $sleepStart to $sleepEnd")
+        Log.d("NotificationWorker", "Notification will ${if (isSleeping) "NOT" else ""} be sent")
+
+        if (!isSleeping) {
+            NotificationUtils.showNotification(applicationContext, "Water Reminder", "Time to drink water!")
+        }
+
         return Result.success()
     }
 }
+

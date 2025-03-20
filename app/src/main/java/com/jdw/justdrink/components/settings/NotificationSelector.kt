@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,6 +27,13 @@ fun NotificationSelector(context: Context) {
     var sleepStart by remember { mutableIntStateOf(prefs.getSleepStart()) }
     var sleepEnd by remember { mutableIntStateOf(prefs.getSleepEnd()) }
 
+
+    val sliderColors = SliderDefaults.colors(
+        thumbColor = MaterialTheme.colorScheme.secondary,
+        activeTrackColor = MaterialTheme.colorScheme.secondary,
+        inactiveTrackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.24f)
+    )
+
     Column(modifier = Modifier.padding(16.dp)) {
         Text("Reminder Frequency (Minutes)")
         Slider(
@@ -35,7 +44,8 @@ fun NotificationSelector(context: Context) {
                 NotificationScheduler.scheduleNotifications(context)
             },
             valueRange = 15f..180f,
-            steps = 10
+            steps = 10,
+            colors = sliderColors
         )
         Text("$frequency minutes")
 
@@ -48,7 +58,8 @@ fun NotificationSelector(context: Context) {
                 sleepStart = it.toInt()
                 prefs.saveSleepSchedule(sleepStart, sleepEnd)
             },
-            valueRange = 0f..23f
+            valueRange = 0f..23f,
+            colors = sliderColors
         )
         Text("$sleepStart:00")
 
@@ -61,7 +72,8 @@ fun NotificationSelector(context: Context) {
                 sleepEnd = it.toInt()
                 prefs.saveSleepSchedule(sleepStart, sleepEnd)
             },
-            valueRange = 0f..23f
+            valueRange = 0f..23f,
+            colors = sliderColors
         )
         Text("$sleepEnd:00")
 
