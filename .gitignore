@@ -19,7 +19,6 @@ app/**/output.json
 .kotlin
 .tmp
 /caches
-/config
 /daemon
 /wrapper
 /native
