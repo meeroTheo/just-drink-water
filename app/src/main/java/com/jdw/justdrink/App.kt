@@ -22,28 +22,27 @@ fun App(intakeViewModel: IntakeViewModel) {
     val navController = rememberNavController()
     val context = LocalContext.current // Get the context
 
-    MaterialTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surfaceContainerLowest)
-        ) {
-            Scaffold(
-                modifier = Modifier.fillMaxSize(),
-                bottomBar = { BottomNavigationBar(navController) }
-            ) { paddingValues ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                        .background(MaterialTheme.colorScheme.surfaceContainerLowest)
-                ) {
-                    NavHost(navController = navController, startDestination = "home") {
-                        composable("home") { HomePage(intakeViewModel) }
-                        composable("settings") { SettingsPage(context) }
-                    }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surfaceContainerLowest)
+    ) {
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            bottomBar = { BottomNavigationBar(navController) }
+        ) { paddingValues ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(MaterialTheme.colorScheme.surfaceContainerLowest)
+            ) {
+                NavHost(navController = navController, startDestination = "home") {
+                    composable("home") { HomePage(intakeViewModel) }
+                    composable("settings") { SettingsPage(context) }
                 }
             }
         }
     }
+
 }

@@ -21,7 +21,7 @@ class SharedPreferencesHelper(context: Context) {
         }
     }
 
-    // Save notification frequency in minutes
+    //notification frequency
     fun saveReminderFrequency(frequency: Int) {
         sharedPreferences.edit {
             putInt("reminderFrequency", frequency)
@@ -29,10 +29,9 @@ class SharedPreferencesHelper(context: Context) {
     }
 
     fun getReminderFrequency(): Int {
-        return sharedPreferences.getInt("reminderFrequency", 60) // Default to 60 mins
+        return sharedPreferences.getInt("reminderFrequency", 60)
     }
 
-    // Save user's sleep schedule (start and end in 24-hour format)
     fun saveSleepSchedule(sleepStart: Int, sleepEnd: Int) {
         sharedPreferences.edit {
             putInt("sleepStart", sleepStart)
@@ -41,10 +40,21 @@ class SharedPreferencesHelper(context: Context) {
     }
 
     fun getSleepStart(): Int {
-        return sharedPreferences.getInt("sleepStart", 23) // Default to 11 PM
+        return sharedPreferences.getInt("sleepStart", 23)
     }
 
     fun getSleepEnd(): Int {
-        return sharedPreferences.getInt("sleepEnd", 7) // Default to 7 AM
+        return sharedPreferences.getInt("sleepEnd", 7)
     }
+
+    fun isFirstLaunch(): Boolean {
+        return sharedPreferences.getBoolean("firstLaunch", true)
+    }
+
+    fun setFirstLaunchDone() {
+        sharedPreferences.edit {
+            putBoolean("firstLaunch", false)
+        }
+    }
+
 }

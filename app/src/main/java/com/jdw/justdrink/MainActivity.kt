@@ -5,11 +5,16 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.work.Configuration
-import androidx.work.WorkManager
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.jdw.justdrink.components.firstlaunch.FirstTimeLaunchScreen
 import com.jdw.justdrink.data.WaterDatabase
 import com.jdw.justdrink.data.WaterIntakeRepository
 import com.jdw.justdrink.data.IntakeViewModel
+import com.jdw.justdrink.helper.SharedPreferencesHelper
 import com.jdw.justdrink.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +37,18 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AppTheme {
-                App(intakeViewModel) // Pass ViewModel to App()
+                MaterialTheme {
+                    val prefs = SharedPreferencesHelper(this)
+                    var isFirstLaunch by remember { mutableStateOf(prefs.isFirstLaunch()) }
+
+                    if (isFirstLaunch) {
+                        FirstTimeLaunchScreen(
+                            onSetupComplete = { isFirstLaunch = false }, context = this)
+                    }
+                    else {
+                        App(intakeViewModel)
+                    }
+                }
             }
         }
     }

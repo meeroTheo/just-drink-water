@@ -33,6 +33,8 @@ work-runtime-ktx = "2.8.1"
 
 [libraries]
 accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist-navigation-animation" }
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist-navigation-animation" }
+accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist-navigation-animation" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material-version" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material-icons-extended-version" }
 
