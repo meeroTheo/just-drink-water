@@ -38,7 +38,7 @@ fun App(intakeViewModel: IntakeViewModel) {
                     .background(MaterialTheme.colorScheme.surfaceContainerLowest)
             ) {
                 NavHost(navController = navController, startDestination = "home") {
-                    composable("home") { HomePage(intakeViewModel) }
+                    composable("home") { HomePage(intakeViewModel, LocalContext.current) }
                     composable("settings") { SettingsPage(context) }
                 }
             }

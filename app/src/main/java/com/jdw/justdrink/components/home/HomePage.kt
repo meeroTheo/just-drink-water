@@ -1,6 +1,7 @@
 package com.jdw.justdrink.components.home
 
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,13 +12,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.jdw.justdrink.data.IntakeViewModel
+import com.jdw.justdrink.helper.SharedPreferencesHelper
 import kotlinx.coroutines.launch
 
 
 @Composable
-fun HomePage(viewModel: IntakeViewModel) {
+fun HomePage(viewModel: IntakeViewModel, context: Context) {
     val coroutineScope = rememberCoroutineScope()
     var totalIntake by remember { mutableIntStateOf(0) }
+    val prefs = remember { SharedPreferencesHelper(context) }
+    val userName by remember { mutableStateOf(prefs.getUserName() ?: "User") }
+
 
     //get todays intake from viewmodel
     LaunchedEffect(Unit) {
@@ -26,10 +31,6 @@ fun HomePage(viewModel: IntakeViewModel) {
             totalIntake = intakeRecord ?: 0
         }
     }
-
-    //get context for custom size persistence
-    val context = LocalContext.current
-
 
     Column(modifier = Modifier.fillMaxSize()) {
 
@@ -42,7 +43,7 @@ fun HomePage(viewModel: IntakeViewModel) {
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "placeholder", // Replace with actual user name
+                text = userName.lowercase(), // Replace with actual user name
                 style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold), // Large, bold
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

@@ -73,6 +73,7 @@ fun FirstTimeLaunchScreen(onSetupComplete: () -> Unit, context: Context) {
                     if (pagerState.currentPage < 3) {
                         coroutineScope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
                     } else {
+                        prefs.saveUserName(name) // Save the user's name
                         prefs.saveSleepSchedule(sleepStart, sleepEnd)
                         prefs.saveReminderFrequency(reminderFrequency)
                         prefs.setFirstLaunchDone()
@@ -90,6 +91,7 @@ fun FirstTimeLaunchScreen(onSetupComplete: () -> Unit, context: Context) {
                     contentDescription = if (pagerState.currentPage == 3) "Submit" else "Next"
                 )
             }
+
         }
     }
 }

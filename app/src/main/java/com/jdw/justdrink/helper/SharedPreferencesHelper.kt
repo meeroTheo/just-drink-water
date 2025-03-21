@@ -56,5 +56,14 @@ class SharedPreferencesHelper(context: Context) {
             putBoolean("firstLaunch", false)
         }
     }
+    fun saveUserName(name: String) {
+        sharedPreferences.edit {
+            putString("userName", name)
+        }
+    }
+
+    fun getUserName(): String? {
+        return sharedPreferences.getString("userName", "")
+    }
 
 }
