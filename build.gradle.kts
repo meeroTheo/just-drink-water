@@ -6,7 +6,6 @@ plugins {
     kotlin("android") apply false
     id("com.autonomousapps.dependency-analysis") version "2.10.1"
     alias(libs.plugins.compose.compiler) apply false
-    alias(libs.plugins.detekt)
     alias(libs.plugins.versions)
     id("maven-publish")
     cleanup
@@ -15,22 +14,6 @@ plugins {
 
 allprojects {
     group = PUBLISHING_GROUP
-}
-
-val detektFormatting = libs.detekt.formatting
-
-subprojects {
-    apply {
-        plugin("io.gitlab.arturbosch.detekt")
-    }
-
-    detekt {
-        config.from(rootProject.files("config/detekt/detekt.yml"))
-    }
-
-    dependencies {
-        detektPlugins(detektFormatting)
-    }
 }
 
 tasks {
