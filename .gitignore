@@ -22,3 +22,6 @@ app/**/output.json
 /daemon
 /wrapper
 /native
+key.jks
+app/release/
+
