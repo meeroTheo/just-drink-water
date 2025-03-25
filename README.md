@@ -1,20 +1,15 @@
-<div align="center">
+# justdrinkwater
 
-<a href="https://github.com/meeroTheo/just-drink-water">
-    <img src="./.github/readme-images/app-icon.png" alt="JDW logo" height="192" width="192" />
-</a>
+![Build](https://github.com/meeroTheo/just-drink-water/workflows/Pre%20Merge%20Checks/badge.svg)
 
-# Just Drink Water
+This is your new Kotlin Android Project! Happy hacking!
 
-</div>
+## Template ToDo list 👣
 
-<div align="center">
-
-A free and open source hydration tracker and reminder
-
-<img src="./.github/readme-images/screens.png" alt="JDW screenshots" />
-
-## Download
+- [x] Create a new template project.
+- [ ] Choose a [LICENSE](https://github.com/meeroTheo/just-drink-water/community/license/new?branch=main).
+- [ ] Set your `ORG_GRADLE_PROJECT_NEXUS_USERNAME`, `ORG_GRADLE_PROJECT_NEXUS_PASSWORD`, `ORG_GRADLE_PROJECT_SIGNING_KEY` and `ORG_GRADLE_PROJECT_SIGNING_PWD` secrets in [Settings](https://github.com/meeroTheo/just-drink-water/settings/secrets/actions).
+- [ ] Code some cool apps and libraries 🚀.
 
 ## Features
 
