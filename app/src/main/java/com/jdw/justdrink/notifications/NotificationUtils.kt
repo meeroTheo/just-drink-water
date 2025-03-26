@@ -11,7 +11,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.jdw.justdrink.MainActivity
-import com.github.meerotheo.justdrinkwater.app.R
+import com.jdw.justdrink.R
+
 
 object NotificationUtils {
     private const val CHANNEL_ID = "WaterReminderChannel"

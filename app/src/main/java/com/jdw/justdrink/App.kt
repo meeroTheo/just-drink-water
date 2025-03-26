@@ -15,10 +15,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.jdw.justdrink.data.IntakeViewModel
 import androidx.compose.ui.platform.LocalContext
+import com.jdw.justdrink.ui.theme.AppTheme
 
 
 @Composable
-fun App(intakeViewModel: IntakeViewModel) {
+fun App(
+    intakeViewModel: IntakeViewModel,
+    onThemeChange: (AppTheme) -> Unit
+) {
     val navController = rememberNavController()
     val context = LocalContext.current // Get the context
 
@@ -39,7 +43,7 @@ fun App(intakeViewModel: IntakeViewModel) {
             ) {
                 NavHost(navController = navController, startDestination = "home") {
                     composable("home") { HomePage(intakeViewModel, LocalContext.current) }
-                    composable("settings") { SettingsPage(context) }
+                    composable("settings") { SettingsPage(context, onThemeChange = onThemeChange) }
                 }
             }
         }

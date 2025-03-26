@@ -8,27 +8,43 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jdw.justdrink.helper.SharedPreferencesHelper
 import com.jdw.justdrink.helper.TimePickerDialog
 import com.jdw.justdrink.notifications.NotificationScheduler
+import com.jdw.justdrink.ui.theme.AppTheme
+import com.jdw.justdrink.ui.theme.themes
 
 @Composable
-fun SettingsPage(context: Context) {
+fun SettingsPage(context: Context, onThemeChange: (AppTheme) -> Unit) {
     val prefs = remember { SharedPreferencesHelper(context) }
     var showSleepStartDialog by remember { mutableStateOf(false) }
     var showSleepEndDialog by remember { mutableStateOf(false) }
     var showReminderDialog by remember { mutableStateOf(false) }
+    var showThemeDialog by remember { mutableStateOf(false) }
 
     var sleepStart by remember { mutableIntStateOf(prefs.getSleepStart()) }
     var sleepEnd by remember { mutableIntStateOf(prefs.getSleepEnd()) }
     var reminderFrequency by remember { mutableIntStateOf(prefs.getReminderFrequency()) }
+    var selectedTheme by remember { mutableStateOf(themes.find { it.name == prefs.getSelectedTheme() } ?: AppTheme.Default) }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("General", style = MaterialTheme.typography.headlineLarge, modifier = Modifier.padding(top = 100.dp, bottom = 20.dp),
-            color = Color.White)
+        Text("General", style = MaterialTheme.typography.headlineLarge,
+            modifier = Modifier.padding(top = 100.dp, bottom = 20.dp),
+            color = MaterialTheme.colorScheme.onSurface)
+
+        SectionTitle("Appearance")
+        SettingItem(title = "App Theme", subtitle = selectedTheme.name) {
+            showThemeDialog = true
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+        HorizontalDivider(
+            thickness = 1.dp,
+            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
 
         SectionTitle("Reminder Frequency")
         SettingItem(title = "Frequency", subtitle = "$reminderFrequency min") {
@@ -86,6 +102,45 @@ fun SettingsPage(context: Context) {
                 onConfirm = { hour, _ ->
                     sleepEnd = hour
                     prefs.saveSleepSchedule(sleepStart, sleepEnd)
+                }
+            )
+        }
+        if (showThemeDialog) {
+            AlertDialog(
+                onDismissRequest = { showThemeDialog = false },
+                title = { Text("Select Theme") },
+                text = {
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        themes.forEach { theme ->
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        selectedTheme = theme
+                                        onThemeChange(theme) // Trigger theme update
+                                        showThemeDialog = false
+                                    }
+                                    .padding(vertical = 12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                RadioButton(
+                                    selected = (theme.name == selectedTheme.name),
+                                    onClick = {
+                                        selectedTheme = theme
+                                        onThemeChange(theme) // Trigger theme update
+                                        showThemeDialog = false
+                                    }
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(text = theme.name)
+                            }
+                        }
+                    }
+                },
+                confirmButton = {
+                    TextButton(onClick = { showThemeDialog = false }) {
+                        Text("OK")
+                    }
                 }
             )
         }

@@ -2,6 +2,7 @@ package com.jdw.justdrink.helper
 
 import android.content.Context
 import androidx.core.content.edit
+import com.jdw.justdrink.ui.theme.AppTheme
 
 class SharedPreferencesHelper(context: Context) {
     private val sharedPreferences =
@@ -64,6 +65,15 @@ class SharedPreferencesHelper(context: Context) {
 
     fun getUserName(): String? {
         return sharedPreferences.getString("userName", "")
+    }
+
+
+    fun saveSelectedTheme(themeName: String) {
+        sharedPreferences.edit().putString("selected_theme", themeName).apply()
+    }
+
+    fun getSelectedTheme(): String {
+        return sharedPreferences.getString("selected_theme", AppTheme.Default.name) ?: AppTheme.Default.name
     }
 
 }
