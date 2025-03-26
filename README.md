@@ -28,4 +28,3 @@ A free and open source hydration tracker and reminder
 </details>
 
 </div>
-</div>

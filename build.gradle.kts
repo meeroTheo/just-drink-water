@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.versions)
     id("maven-publish")
-    cleanup
     base
 }
 
