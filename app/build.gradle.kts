@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdk = libs.versions.min.sdk.version.get().toInt()
         targetSdk = libs.versions.target.sdk.version.get().toInt()
-        namespace = "com.ncorti.kotlin.template.app"
+        namespace = "com.jdw.justdrink"
 
         applicationId = AppCoordinates.APP_ID
         versionCode = AppCoordinates.APP_VERSION_CODE
