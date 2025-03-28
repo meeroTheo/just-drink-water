@@ -44,7 +44,7 @@ android {
         warningsAsErrors = true
         abortOnError = true
         disable.add("GradleDependency")
-        disable.add("BooleanPropertyPrefix")
+        baseline = file("lint-baseline.xml")
     }
 
 }
