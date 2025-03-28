@@ -15,6 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.jdw.justdrink.data.IntakeViewModel
 import androidx.compose.ui.platform.LocalContext
+import com.jdw.justdrink.components.stats.StatsPage
 import com.jdw.justdrink.ui.theme.AppTheme
 
 
@@ -43,6 +44,7 @@ fun App(
             ) {
                 NavHost(navController = navController, startDestination = "home") {
                     composable("home") { HomePage(intakeViewModel, LocalContext.current) }
+                    composable("stats") { StatsPage(intakeViewModel) }
                     composable("settings") { SettingsPage(context, onThemeChange = onThemeChange) }
                 }
             }

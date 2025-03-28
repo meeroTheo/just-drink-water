@@ -16,4 +16,7 @@ interface WaterIntakeDao {
 
     @Update
     suspend fun updateIntake(waterIntake: WaterIntake)
+
+    @Query("SELECT * FROM water_intake ORDER BY date ASC")
+    suspend fun getAllIntake(): List<WaterIntake>
 }

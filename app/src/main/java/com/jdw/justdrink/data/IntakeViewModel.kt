@@ -17,9 +17,21 @@ class IntakeViewModel(private val repository: WaterIntakeRepository) : ViewModel
         }
     }
 
-
     suspend fun getTodayIntake(): Int? {
         val today = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
         return repository.getIntakeForDate(today)?.totalIntake
     }
+
+    suspend fun getDailyIntakePercentages(): List<Pair<String, Float>> {
+        val intakeData = repository.getAllIntake()
+            .sortedBy { it.date }
+            .takeLast(5) //keep only the last 5 days
+
+        return intakeData.map {
+            val formattedDate = it.date.format(DateTimeFormatter.ofPattern("MMM d"))
+            val percentage = (it.totalIntake / 3000f) * 100
+            formattedDate to percentage
+        }
+    }
+
 }
