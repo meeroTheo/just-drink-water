@@ -2,10 +2,10 @@ package com.jdw.justdrink.components
 import androidx.navigation.NavController
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BarChart
+import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.filled.WaterDrop
-import androidx.compose.material.icons.outlined.BarChart
+import androidx.compose.material.icons.outlined.Analytics
 import androidx.compose.material.icons.outlined.WaterDrop
 import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material3.Icon
@@ -26,8 +26,8 @@ fun BottomNavigationBar(navController: NavController) {
     var selectedItem by remember { mutableIntStateOf(0) }
     val items = listOf("Home","Stats","More")
 
-    val selectedIcons = listOf(Icons.Filled.WaterDrop,Icons.Filled.BarChart, Icons.Filled.MoreHoriz)
-    val unselectedIcons = listOf(Icons.Outlined.WaterDrop,Icons.Outlined.BarChart, Icons.Outlined.MoreHoriz)
+    val selectedIcons = listOf(Icons.Filled.WaterDrop,Icons.Filled.Analytics, Icons.Filled.MoreHoriz)
+    val unselectedIcons = listOf(Icons.Outlined.WaterDrop,Icons.Outlined.Analytics, Icons.Outlined.MoreHoriz)
 
     //get the current destination
     val navBackStackEntry by navController.currentBackStackEntryAsState()

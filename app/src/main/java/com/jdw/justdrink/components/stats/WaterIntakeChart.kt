@@ -58,8 +58,7 @@ fun WaterIntakeChart(viewModel: IntakeViewModel) {
 
         },
         modifier = Modifier
-            .fillMaxWidth()
-            .height(230.dp)
+            .fillMaxSize()
             .padding(16.dp)
             .background(themeColors.surfaceContainerLow, RoundedCornerShape(12.dp))
     )
