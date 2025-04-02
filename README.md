@@ -12,12 +12,14 @@
 
 A free and open source hydration tracker and reminder
 
-<img src="./.github/readme-images/screens.png" alt="JDW screenshots" />
+<!-- Three images placed side by side -->
+<img src="./.github/readme-images/screen1.jpg" alt="JDW screenshot 1" width="30%" />
+<img src="./.github/readme-images/screen2.jpg" alt="JDW screenshot 2" width="30%" />
+<img src="./.github/readme-images/screen3.jpg" alt="JDW screenshot 3" width="30%" />
 
 ## Download
 
 ## Features
-
 
 <div align="left">
 
